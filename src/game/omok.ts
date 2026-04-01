@@ -6,8 +6,14 @@ export type Stone = 0 | 1 | 2;
 export type Player = 'player' | 'cpu';
 export type GameResult = 'player' | 'cpu' | 'draw' | null;
 export type Difficulty = 'low' | 'medium' | 'high';
+export type RuleMode = 'free' | 'renju';
 export type Board = Stone[][];
 type Point = { row: number; col: number };
+
+type MoveValidation = {
+  valid: boolean;
+  reason?: string;
+};
 
 const DIRECTIONS = [
   [1, 0],
@@ -15,6 +21,8 @@ const DIRECTIONS = [
   [1, 1],
   [1, -1],
 ] as const;
+
+const OPEN_FOUR_PATTERNS = ['.XXXX.', '.XXX.X.', '.XX.XX.', '.X.XXX.'];
 
 export function createBoard(): Board {
   return Array.from({ length: BOARD_SIZE }, () => Array<Stone>(BOARD_SIZE).fill(0));
@@ -35,18 +43,80 @@ export function isBoardFull(board: Board): boolean {
   return board.every((row) => row.every((cell) => cell !== 0));
 }
 
-export function hasWinner(board: Board, row: number, col: number): boolean {
+export function hasWinner(
+  board: Board,
+  row: number,
+  col: number,
+  ruleMode: RuleMode = 'free',
+): boolean {
   const stone = board[row][col];
   if (!stone) {
     return false;
   }
 
   return DIRECTIONS.some(([dRow, dCol]) => {
-    let count = 1;
-    count += countDirection(board, row, col, dRow, dCol, stone);
-    count += countDirection(board, row, col, -dRow, -dCol, stone);
-    return count >= 5;
+    const length = getLineLength(board, row, col, dRow, dCol, stone);
+
+    if (ruleMode === 'renju' && stone === 1) {
+      return length === 5;
+    }
+
+    return length >= 5;
   });
+}
+
+export function validateMove(
+  board: Board,
+  row: number,
+  col: number,
+  stone: Exclude<Stone, 0>,
+  ruleMode: RuleMode = 'free',
+): MoveValidation {
+  if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
+    return { valid: false, reason: '보드 범위를 벗어난 착수입니다.' };
+  }
+
+  if (board[row][col] !== 0) {
+    return { valid: false, reason: '이미 돌이 놓인 칸입니다.' };
+  }
+
+  if (ruleMode !== 'renju' || stone !== 1) {
+    return { valid: true };
+  }
+
+  const nextBoard = cloneBoard(board);
+  nextBoard[row][col] = stone;
+
+  if (isOverline(nextBoard, row, col, stone)) {
+    return { valid: false, reason: '렌주룰에서는 흑돌의 장목이 금수입니다.' };
+  }
+
+  const openFourCount = countThreats(nextBoard, row, col, stone, 'openFour');
+  if (openFourCount >= 2) {
+    return { valid: false, reason: '렌주룰에서는 흑돌의 사사 금수가 허용되지 않습니다.' };
+  }
+
+  const openThreeCount = countThreats(nextBoard, row, col, stone, 'openThree');
+  if (openThreeCount >= 2) {
+    return { valid: false, reason: '렌주룰에서는 흑돌의 삼삼 금수가 허용되지 않습니다.' };
+  }
+
+  return { valid: true };
+}
+
+function getLineLength(
+  board: Board,
+  row: number,
+  col: number,
+  dRow: number,
+  dCol: number,
+  stone: Stone,
+) {
+  return (
+    1 +
+    countDirection(board, row, col, dRow, dCol, stone) +
+    countDirection(board, row, col, -dRow, -dCol, stone)
+  );
 }
 
 function countDirection(
@@ -71,6 +141,132 @@ function countDirection(
     count += 1;
     nextRow += dRow;
     nextCol += dCol;
+  }
+
+  return count;
+}
+
+function isOverline(board: Board, row: number, col: number, stone: Exclude<Stone, 0>) {
+  return DIRECTIONS.some(([dRow, dCol]) => getLineLength(board, row, col, dRow, dCol, stone) >= 6);
+}
+
+function buildDirectionalLine(
+  board: Board,
+  row: number,
+  col: number,
+  dRow: number,
+  dCol: number,
+  stone: Exclude<Stone, 0>,
+) {
+  let line = '';
+
+  for (let offset = -4; offset <= 4; offset += 1) {
+    const nextRow = row + dRow * offset;
+    const nextCol = col + dCol * offset;
+
+    if (nextRow < 0 || nextRow >= BOARD_SIZE || nextCol < 0 || nextCol >= BOARD_SIZE) {
+      line += '#';
+      continue;
+    }
+
+    const cell = board[nextRow][nextCol];
+    if (cell === 0) {
+      line += '.';
+    } else if (cell === stone) {
+      line += 'X';
+    } else {
+      line += 'O';
+    }
+  }
+
+  return line;
+}
+
+function hasCenteredPattern(line: string, patterns: string[]) {
+  const center = 4;
+
+  return patterns.some((pattern) => {
+    for (let start = 0; start <= line.length - pattern.length; start += 1) {
+      if (start > center || start + pattern.length <= center) {
+        continue;
+      }
+
+      if (line.slice(start, start + pattern.length) === pattern) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+}
+
+function createsOpenFourInDirection(
+  board: Board,
+  row: number,
+  col: number,
+  dRow: number,
+  dCol: number,
+  stone: Exclude<Stone, 0>,
+) {
+  const line = buildDirectionalLine(board, row, col, dRow, dCol, stone);
+  return hasCenteredPattern(line, OPEN_FOUR_PATTERNS);
+}
+
+function createsOpenThreeInDirection(
+  board: Board,
+  row: number,
+  col: number,
+  dRow: number,
+  dCol: number,
+  stone: Exclude<Stone, 0>,
+) {
+  if (createsOpenFourInDirection(board, row, col, dRow, dCol, stone)) {
+    return false;
+  }
+
+  for (let offset = -4; offset <= 4; offset += 1) {
+    const nextRow = row + dRow * offset;
+    const nextCol = col + dCol * offset;
+
+    if (
+      nextRow < 0 ||
+      nextRow >= BOARD_SIZE ||
+      nextCol < 0 ||
+      nextCol >= BOARD_SIZE ||
+      board[nextRow][nextCol] !== 0
+    ) {
+      continue;
+    }
+
+    const simulated = cloneBoard(board);
+    simulated[nextRow][nextCol] = stone;
+
+    if (createsOpenFourInDirection(simulated, row, col, dRow, dCol, stone)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function countThreats(
+  board: Board,
+  row: number,
+  col: number,
+  stone: Exclude<Stone, 0>,
+  kind: 'openThree' | 'openFour',
+) {
+  let count = 0;
+
+  for (const [dRow, dCol] of DIRECTIONS) {
+    const matched =
+      kind === 'openFour'
+        ? createsOpenFourInDirection(board, row, col, dRow, dCol, stone)
+        : createsOpenThreeInDirection(board, row, col, dRow, dCol, stone);
+
+    if (matched) {
+      count += 1;
+    }
   }
 
   return count;
@@ -112,6 +308,31 @@ function getCandidateMoves(board: Board): Point[] {
   }
 
   return [...candidates.values()];
+}
+
+function getLegalCandidateMoves(
+  board: Board,
+  stone: Exclude<Stone, 0>,
+  ruleMode: RuleMode,
+) {
+  const legalCandidates = getCandidateMoves(board).filter((move) =>
+    validateMove(board, move.row, move.col, stone, ruleMode).valid,
+  );
+
+  if (legalCandidates.length > 0) {
+    return legalCandidates;
+  }
+
+  const fallback: Point[] = [];
+  for (let row = 0; row < BOARD_SIZE; row += 1) {
+    for (let col = 0; col < BOARD_SIZE; col += 1) {
+      if (validateMove(board, row, col, stone, ruleMode).valid) {
+        fallback.push({ row, col });
+      }
+    }
+  }
+
+  return fallback;
 }
 
 function getLineScore(length: number, openEnds: number) {
@@ -188,22 +409,27 @@ export function getCpuMove(
   board: Board,
   difficulty: Difficulty,
   cpuStone: Exclude<Stone, 0>,
+  ruleMode: RuleMode = 'free',
 ): Point {
-  const candidates = getCandidateMoves(board);
+  const candidates = getLegalCandidateMoves(board, cpuStone, ruleMode);
   const playerStone: Exclude<Stone, 0> = cpuStone === 1 ? 2 : 1;
 
   for (const move of candidates) {
     const simulated = cloneBoard(board);
     simulated[move.row][move.col] = cpuStone;
-    if (hasWinner(simulated, move.row, move.col)) {
+    if (hasWinner(simulated, move.row, move.col, ruleMode)) {
       return move;
     }
   }
 
   for (const move of candidates) {
+    if (!validateMove(board, move.row, move.col, playerStone, ruleMode).valid) {
+      continue;
+    }
+
     const simulated = cloneBoard(board);
     simulated[move.row][move.col] = playerStone;
-    if (hasWinner(simulated, move.row, move.col)) {
+    if (hasWinner(simulated, move.row, move.col, ruleMode)) {
       return move;
     }
   }

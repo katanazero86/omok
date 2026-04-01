@@ -8,7 +8,7 @@ function App() {
       <header className="topbar">
         <div>
           <p className="eyebrow">PIXEL OMOK</p>
-          <h1>오목 대전실</h1>
+          <h1>오목 대전</h1>
         </div>
         <nav className="nav">
           <NavLink className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`} to="/">
