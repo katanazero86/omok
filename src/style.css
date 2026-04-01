@@ -1,0 +1,279 @@
+:root {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #f9efd6;
+  background:
+    radial-gradient(circle at top, #3c2a1b 0%, #1a120c 52%),
+    linear-gradient(180deg, #20160f, #140e09);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(255, 208, 102, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(255, 208, 102, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, #2a1c12 0%, #140d08 100%);
+  background-size: 18px 18px, 18px 18px, 100% 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(1200px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrow,
+.panel-label {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: #ffca78;
+}
+
+.topbar h1,
+.panel-card h2 {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-link,
+.pixel-button {
+  border: 3px solid #3d220a;
+  background: #efb45f;
+  color: #231004;
+  padding: 10px 16px;
+  box-shadow: 4px 4px 0 #120901;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.nav-link.active,
+.pixel-button:hover {
+  background: #ffd27e;
+}
+
+.nav-link:active,
+.pixel-button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 #120901;
+}
+
+.page-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.setup-layout {
+  display: grid;
+  gap: 20px;
+}
+
+.board-panel,
+.panel-card {
+  border: 4px solid #4c2b12;
+  background: rgba(33, 18, 8, 0.92);
+  box-shadow: 8px 8px 0 rgba(10, 4, 1, 0.75);
+}
+
+.board-panel {
+  padding: 18px;
+}
+
+.board-canvas {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.info-panel,
+.rules-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.panel-card {
+  padding: 18px;
+}
+
+.panel-copy {
+  margin: 10px 0 0;
+  color: #f3dfb9;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pixel-button {
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.start-button {
+  width: fit-content;
+}
+
+.difficulty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.difficulty-card {
+  text-align: left;
+  border: 4px solid #4c2b12;
+  background: rgba(33, 18, 8, 0.92);
+  color: #f9efd6;
+  padding: 18px;
+  box-shadow: 8px 8px 0 rgba(10, 4, 1, 0.75);
+  cursor: pointer;
+}
+
+.difficulty-card.selected {
+  border-color: #efb45f;
+  transform: translate(-2px, -2px);
+}
+
+.difficulty-card strong,
+.difficulty-card p {
+  display: block;
+  margin-top: 12px;
+}
+
+.action-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.result-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(11, 7, 4, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.result-modal {
+  width: min(100%, 420px);
+  border: 4px solid #4c2b12;
+  background: rgba(33, 18, 8, 0.98);
+  box-shadow: 10px 10px 0 rgba(10, 4, 1, 0.8);
+  padding: 22px;
+}
+
+.rules-layout {
+  display: grid;
+  gap: 20px;
+}
+
+.hero-card {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rules-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.rule-card {
+  min-height: 138px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rule-index {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 10px;
+  background: #ffd27e;
+  color: #1f1105;
+  border: 3px solid #5a330e;
+  box-shadow: 3px 3px 0 #120901;
+}
+
+@media (max-width: 960px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-panel,
+  .rules-grid,
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100vw - 20px, 100%);
+    padding-top: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .board-panel,
+  .panel-card {
+    box-shadow: 5px 5px 0 rgba(10, 4, 1, 0.75);
+  }
+}
