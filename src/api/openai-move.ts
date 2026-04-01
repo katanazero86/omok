@@ -156,7 +156,7 @@ export async function requestGptMove(
         {
           role: 'system',
           content: [
-            'You are an omok AI.',
+            'You are an Omok (Gomoku or Five-in-a-row) champion AI.',
             `Board size is ${BOARD_SIZE}x${BOARD_SIZE}.`,
             `You are ${opponentStone === 1 ? 'black(B)' : 'white(W)'}.`,
             `Opponent is ${playerStone === 1 ? 'black(B)' : 'white(W)'}.`,
@@ -166,7 +166,9 @@ export async function requestGptMove(
             '2. Otherwise, if the opponent has an immediate winning move, block it if possible.',
             '3. In renju, if you are black, never choose a forbidden move.',
             '4. Choose only from the legal_moves provided by the user.',
-            '5. Return only JSON matching the schema.',
+            '5. Among legal moves, choose the strongest and most optimal move for the current board.',
+            '6. Respond within 10 seconds.',
+            '7. Return only JSON matching the schema.',
           ].join('\n'),
         },
         {
@@ -175,7 +177,9 @@ export async function requestGptMove(
             {
               rule_mode: ruleMode,
               you_are: opponentStone === 1 ? 'black' : 'white',
+              your_stone: opponentStone === 1 ? 'B' : 'W',
               opponent_is: playerStone === 1 ? 'black' : 'white',
+              opponent_stone: playerStone === 1 ? 'B' : 'W',
               board: serializeBoard(board),
               legal_moves: legalMoves,
               immediate_winning_move: immediateWin,

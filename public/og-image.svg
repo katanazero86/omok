@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#1B120C"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.18">
+    <path d="M0 0H1200" stroke="#FFCA78" stroke-width="2"/>
+    <path d="M0 42H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 84H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 126H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 168H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 210H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 252H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 294H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 336H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 378H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 420H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 462H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 504H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 546H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 588H1200" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M0 630H1200" stroke="#FFCA78" stroke-width="2"/>
+    <path d="M0 0V630" stroke="#FFCA78" stroke-width="2"/>
+    <path d="M42 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M84 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M126 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M168 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M210 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M252 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M294 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M336 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M378 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M420 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M462 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M504 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M546 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M588 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M630 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M672 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M714 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M756 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M798 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M840 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M882 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M924 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M966 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1008 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1050 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1092 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1134 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1176 0V630" stroke="#FFCA78" stroke-width="1"/>
+    <path d="M1200 0V630" stroke="#FFCA78" stroke-width="2"/>
+  </g>
+  <rect x="104" y="88" width="430" height="430" fill="#E0A05C" stroke="#5D3413" stroke-width="16"/>
+  <rect x="130" y="114" width="378" height="378" fill="none" stroke="#5D3413" stroke-width="4"/>
+  <g opacity="0.9" stroke="#5D3413" stroke-width="3">
+    <path d="M154 138H484"/>
+    <path d="M154 174H484"/>
+    <path d="M154 210H484"/>
+    <path d="M154 246H484"/>
+    <path d="M154 282H484"/>
+    <path d="M154 318H484"/>
+    <path d="M154 354H484"/>
+    <path d="M154 390H484"/>
+    <path d="M154 426H484"/>
+    <path d="M154 462H484"/>
+    <path d="M154 138V484"/>
+    <path d="M190 138V484"/>
+    <path d="M226 138V484"/>
+    <path d="M262 138V484"/>
+    <path d="M298 138V484"/>
+    <path d="M334 138V484"/>
+    <path d="M370 138V484"/>
+    <path d="M406 138V484"/>
+    <path d="M442 138V484"/>
+    <path d="M478 138V484"/>
+  </g>
+  <circle cx="262" cy="282" r="18" fill="#1A1A1A"/>
+  <circle cx="298" cy="282" r="18" fill="#F7F1E7" stroke="#D7CCBC" stroke-width="3"/>
+  <circle cx="334" cy="282" r="18" fill="#1A1A1A"/>
+  <circle cx="370" cy="246" r="18" fill="#1A1A1A"/>
+  <circle cx="226" cy="246" r="18" fill="#F7F1E7" stroke="#D7CCBC" stroke-width="3"/>
+  <circle cx="262" cy="318" r="18" fill="#1A1A1A"/>
+  <circle cx="262" cy="282" r="6" fill="#D92B2B" stroke="#FFF8EF" stroke-width="3"/>
+  <text x="592" y="220" fill="#FFCA78" font-family="'Segoe UI', 'Apple SD Gothic Neo', sans-serif" font-size="24" font-weight="700" letter-spacing="6">PIXEL OMOK</text>
+  <text x="592" y="302" fill="#FFF3D6" font-family="'Segoe UI', 'Apple SD Gothic Neo', sans-serif" font-size="72" font-weight="800">오목 대전</text>
+  <text x="592" y="358" fill="#F1D7A8" font-family="'Segoe UI', 'Apple SD Gothic Neo', sans-serif" font-size="28" font-weight="600">자유룰 · 렌주룰 · CPU / GPT 대전</text>
+  <text x="592" y="422" fill="#E8C58A" font-family="'Segoe UI', 'Apple SD Gothic Neo', sans-serif" font-size="24" font-weight="500">픽셀 감성 바둑판 위에서 흑돌과 백돌을 선택해 플레이하세요.</text>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientTransform="matrix(0 315 -600 0 600 80)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3C2A1B"/>
+      <stop offset="1" stop-color="#140D08"/>
+    </radialGradient>
+  </defs>
+</svg>

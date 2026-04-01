@@ -183,6 +183,8 @@ export function GamePage() {
   }, [clock, finishedAt, startedAt]);
 
   const isResultModalOpen = phase === 'playing' && result !== null;
+  const resultEffectClass =
+    result === 'player' ? ' result-modal-win' : result === 'cpu' ? ' result-modal-lose' : ' result-modal-draw';
 
   const resetBoardState = (choice = stoneChoice) => {
     setBoard(createBoard());
@@ -417,10 +419,16 @@ export function GamePage() {
           <div
             aria-labelledby="result-modal-title"
             aria-modal="true"
-            className="result-modal"
+            className={`result-modal${resultEffectClass}`}
             role="dialog"
           >
-            <p className="panel-label">GAME OVER</p>
+            <div aria-hidden="true" className="result-burst" />
+            <div aria-hidden="true" className="result-smoke">
+              <span />
+              <span />
+              <span />
+            </div>
+            <p className="panel-label">{result === 'player' ? 'YOU WIN' : result === 'cpu' ? 'GAME OVER' : 'DRAW'}</p>
             <h2 id="result-modal-title">{buildResultText(result, opponentMode)}</h2>
             <p className="panel-copy">총 소요 시간은 {elapsedLabel}입니다.</p>
             <div className="action-row">

@@ -23,6 +23,7 @@ const DIRECTIONS = [
 ] as const;
 
 const OPEN_FOUR_PATTERNS = ['.XXXX.', '.XXX.X.', '.XX.XX.', '.X.XXX.'];
+const OPEN_THREE_PATTERNS = ['..XXX..', '.XX.X.', '.X.XX.', '.XXX..', '..XXX.'];
 
 export function createBoard(): Board {
   return Array.from({ length: BOARD_SIZE }, () => Array<Stone>(BOARD_SIZE).fill(0));
@@ -224,29 +225,8 @@ function createsOpenThreeInDirection(
     return false;
   }
 
-  for (let offset = -4; offset <= 4; offset += 1) {
-    const nextRow = row + dRow * offset;
-    const nextCol = col + dCol * offset;
-
-    if (
-      nextRow < 0 ||
-      nextRow >= BOARD_SIZE ||
-      nextCol < 0 ||
-      nextCol >= BOARD_SIZE ||
-      board[nextRow][nextCol] !== 0
-    ) {
-      continue;
-    }
-
-    const simulated = cloneBoard(board);
-    simulated[nextRow][nextCol] = stone;
-
-    if (createsOpenFourInDirection(simulated, row, col, dRow, dCol, stone)) {
-      return true;
-    }
-  }
-
-  return false;
+  const line = buildDirectionalLine(board, row, col, dRow, dCol, stone);
+  return hasCenteredPattern(line, OPEN_THREE_PATTERNS);
 }
 
 function countThreats(
