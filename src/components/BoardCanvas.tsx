@@ -165,7 +165,7 @@ function renderBoard(
     CELL_SIZE * (BOARD_SIZE - 1) + CELL_SIZE,
     CELL_SIZE * (BOARD_SIZE - 1) + CELL_SIZE,
   );
-  hitLayer.on('pointertap', (event) => {
+  hitLayer.on('pointerdown', (event) => {
     if (disabled) {
       return;
     }
@@ -278,6 +278,7 @@ export function BoardCanvas({
       app.canvas.style.width = '100%';
       app.canvas.style.height = '100%';
       app.canvas.style.imageRendering = 'pixelated';
+      app.canvas.style.touchAction = 'none';
       appRef.current = app;
       renderBoard(
         app.stage,
