@@ -79,6 +79,14 @@ export function GamePage() {
   }, [finishedAt, phase, startedAt]);
 
   useEffect(() => {
+    if (phase !== 'playing') {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [phase]);
+
+  useEffect(() => {
     if (phase !== 'playing' || turn !== 'cpu' || result) {
       return;
     }
