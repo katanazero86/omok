@@ -253,24 +253,43 @@ export function GamePage() {
             19x19 바둑판에서 진행됩니다. 자유룰과 렌주룰 중 하나를 고를 수 있고, 흑돌은 선공,
             백돌은 후공입니다.
           </p>
+          <p className="panel-copy">
+            - GPT 대전은 숨김 처리(2026.04.01)
+          </p>
         </article>
 
         <div className="difficulty-grid">
-          {(['cpu', 'gpt'] as OpponentMode[]).map((mode) => (
-            <button
-              className={`difficulty-card${opponentMode === mode ? ' selected' : ''}`}
-              key={mode}
-              onClick={() => setOpponentMode(mode)}
-              type="button"
-            >
-              <span className="rule-index">{OPPONENT_LABELS[mode]}</span>
-              <strong>{OPPONENT_LABELS[mode]} 대전</strong>
-              <p>
-                {mode === 'cpu'
-                  ? '로컬 알고리즘으로 빠르게 대전합니다.'
-                  : '브라우저에서 OpenAI 모델을 호출해 수를 고릅니다.'}
-              </p>
-            </button>
+          {/*{(['cpu', 'gpt'] as OpponentMode[]).map((mode) => (*/}
+          {/*  <button*/}
+          {/*    className={`difficulty-card${opponentMode === mode ? ' selected' : ''}`}*/}
+          {/*    key={mode}*/}
+          {/*    onClick={() => setOpponentMode(mode)}*/}
+          {/*    type="button"*/}
+          {/*  >*/}
+          {/*    <span className="rule-index">{OPPONENT_LABELS[mode]}</span>*/}
+          {/*    <strong>{OPPONENT_LABELS[mode]} 대전</strong>*/}
+          {/*    <p>*/}
+          {/*      {mode === 'cpu'*/}
+          {/*        ? '로컬 알고리즘으로 빠르게 대전합니다.'*/}
+          {/*        : '브라우저에서 OpenAI 모델을 호출해 수를 고릅니다.'}*/}
+          {/*    </p>*/}
+          {/*  </button>*/}
+          {/*))}*/}
+          {(['cpu'] as OpponentMode[]).map((mode) => (
+              <button
+                  className={`difficulty-card${opponentMode === mode ? ' selected' : ''}`}
+                  key={mode}
+                  onClick={() => setOpponentMode(mode)}
+                  type="button"
+              >
+                <span className="rule-index">{OPPONENT_LABELS[mode]}</span>
+                <strong>{OPPONENT_LABELS[mode]} 대전</strong>
+                <p>
+                  {mode === 'cpu'
+                      ? '로컬 알고리즘으로 빠르게 대전합니다.'
+                      : '브라우저에서 OpenAI 모델을 호출해 수를 고릅니다.'}
+                </p>
+              </button>
           ))}
         </div>
 
