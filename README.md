@@ -3,6 +3,10 @@
 React, Vite, TypeScript 기반으로 만든 CPU 대전 오목 프로젝트입니다.  
 픽셀 감성의 바둑판 UI 위에 난이도 선택, 돌 색 선택, CPU 대전, 룰 안내, 종료 결과 모달 등을 구현했습니다.
 
+## 배포 링크
+
+- 서비스 URL: [https://omok-pi.vercel.app](https://omok-pi.vercel.app)
+
 ## 기술 스택
 
 - `React`
@@ -11,6 +15,7 @@ React, Vite, TypeScript 기반으로 만든 CPU 대전 오목 프로젝트입니
 - `PixiJS`
 - `React Router DOM`
 - `CSS`
+- `Vercel`
 
 ## 개발 방식
 
@@ -80,7 +85,8 @@ omok/
 ├─ index.html
 ├─ package.json
 ├─ tsconfig.json
-└─ vite.config.ts
+├─ vite.config.ts
+└─ README.md
 ```
 
 ## 파일 설명
